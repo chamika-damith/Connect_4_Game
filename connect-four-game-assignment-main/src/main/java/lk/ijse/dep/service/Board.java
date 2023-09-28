@@ -8,5 +8,10 @@ public interface Board {
     public BoardUI getBoardUI();
 
     public int findNextAvailableSpot(int col);
+    public boolean isLegalMoves(int col);
+    public boolean exitsLegalMoves();
 
+    public void updateMove(int col,Piece move);
+
+    public Winner findWinner();
 }
