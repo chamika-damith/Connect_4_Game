@@ -23,8 +23,9 @@ public class AiPlayer extends Player{
         int num=col;
         do {
             num= r.nextInt(6);
-            System.out.println(num+"move");
-            if (board.isLegalMoves(num))break;
+            if (board.isLegalMoves(num)){
+                break;
+            }
 
         }while (!board.isLegalMoves(num));
 
@@ -37,7 +38,7 @@ public class AiPlayer extends Player{
 
         if (winningPiece == Piece.GREEN) {
             board.getBoardUI().notifyWinner(winner);
-        } else if (!board.exitsLegalMoves()) {
+        } else if (board.exitsLegalMoves()) {
             System.out.println("Empty");
             board.getBoardUI().notifyWinner(new Winner(Piece.EMPTY));
         }

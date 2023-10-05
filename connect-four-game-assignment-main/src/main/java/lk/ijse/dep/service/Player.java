@@ -1,7 +1,7 @@
 package lk.ijse.dep.service;
 
 public class Player {
-    Board board;
+    protected Board board;
 
     public Player(Board board) {
         this.board = board;

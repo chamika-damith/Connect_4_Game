@@ -1,8 +1,8 @@
 package lk.ijse.dep.service;
 
 public class BoardImpl implements Board{
-    private Piece piece[][];
-    BoardUI boardUI;
+    private final Piece[][] piece;
+    private final BoardUI boardUI;
 
     public BoardImpl(BoardUI boardUI) {
         this.boardUI = boardUI;
@@ -30,11 +30,7 @@ public class BoardImpl implements Board{
 
     @Override
     public boolean isLegalMoves(int col) {
-        if (findNextAvailableSpot(col) != -1) {
-            return true;
-        }
-
-        return false;
+        return findNextAvailableSpot(col) != -1;
     }
 
     @Override
@@ -42,28 +38,28 @@ public class BoardImpl implements Board{
         for (int i = 0; i < NUM_OF_COLS; i++) {
             for (int j = 0; j < NUM_OF_ROWS; j++) {
                 if (piece[i][j] == Piece.EMPTY) {
-                    return true;
+                    return false;
                 }
 
             }
         }
-        return false;
+        return true;
     }
 
     @Override
     public void updateMove(int col, Piece move) {
-        if (isLegalMoves(col)) {
             int row = findNextAvailableSpot(col);
             piece[col][row] = move;
-        }
     }
 
     @Override
     public Winner findWinner() {
+
+        int greencount = 0;
+        int bluecount = 0;
+        int emptycount = 0;
+
         for (int i = 0; i < NUM_OF_COLS; i++) {
-            int greencount = 0;
-            int bluecount = 0;
-            int emptycount = 0;
             for (int j = 0; j < NUM_OF_ROWS; j++) {
                 if (piece[i][j] == Piece.GREEN) {
                     greencount += 1;
@@ -92,9 +88,6 @@ public class BoardImpl implements Board{
 
 
         for (int i = 0; i < NUM_OF_ROWS; i++) {
-            int greencount = 0;
-            int bluecount = 0;
-            int emptycount = 0;
             for (int j = 0; j < NUM_OF_COLS; j++) {
                 if (piece[j][i] == Piece.GREEN) {
                     greencount += 1;
@@ -123,7 +116,7 @@ public class BoardImpl implements Board{
         return new Winner(Piece.EMPTY);
     }
 
-    public void setBoardUI(BoardUI boardUI) {
-        this.boardUI = boardUI;
-    }
+//    public void setBoardUI(BoardUI boardUI) {
+//        this.boardUI = boardUI;
+//    }
 }
